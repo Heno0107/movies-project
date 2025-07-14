@@ -1,29 +1,37 @@
-import { createSlice , createAsyncThunk } from "@reduxjs/toolkit";
-import { filmsAPI } from "../../api/api";
+import { createSlice , createAsyncThunk , type PayloadAction } from "@reduxjs/toolkit";
 
-export const getGenresTC = createAsyncThunk(
+import { filmsAPI } from "../../api/api";
+import type { GenresType } from "../../types/types";
+
+export const getGenresTC = createAsyncThunk<Array<GenresType>>(
     'getGenresTC' ,
-    async (_ , {dispatch}) => {
-        const res = await filmsAPI.getGenres()
-        return res.data
+    async (lang : any) => {
+        const res = await filmsAPI.getGenres(lang)
+        return res.data.genres
     }
 )
+type GenresInitialStateType = {
+    genres : Array<GenresType> ,
+    isFetching : boolean
+}
+
+const initialState : GenresInitialStateType = {
+    genres : [] ,
+    isFetching : false
+}
 
 export const genresSlice = createSlice({
     name : 'genresSlice' ,
-    initialState : {
-        genres : [] ,
-        isFetching : false
-    } ,
+    initialState ,
     reducers : {
-
+        
     } ,
     extraReducers : (builder) => {
         builder.addCase(getGenresTC.pending , (state) => {
             state.isFetching = true
         })
-        builder.addCase(getGenresTC.fulfilled , (state , action) => {
-            state.genres = action.payload.genres
+        builder.addCase(getGenresTC.fulfilled , (state , action : PayloadAction<Array<GenresType>>) => {
+            state.genres = action.payload
             state.isFetching = false
         })
     }

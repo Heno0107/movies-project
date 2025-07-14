@@ -1,0 +1,9 @@
+.movie {
+    background-color: white;
+    padding: 8px 12px;
+}
+
+.movie > h3 {
+    text-align: center;
+    color: brown;
+}

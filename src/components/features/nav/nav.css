@@ -1,0 +1,37 @@
+.logo {
+    max-width: 200px;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 28px;
+    background-color: white;
+    box-shadow: black 0 0 16px;
+}
+
+.genres {
+    display: grid;
+    grid-template-columns: repeat(8 , 1fr);
+    gap: 8px;
+}
+
+.genreBtn {
+    background-color: brown;
+    color: white;
+    font-size: 16px;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: 0.4s;
+    &:hover {
+        background-color: white;
+        border: 1px solid brown;
+        color: brown;
+    }
+}
